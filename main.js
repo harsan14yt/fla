@@ -398,25 +398,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // 🔥 CHANGE: Close the modal immediately on any error (User rejected/Canceled/Failed)
             showProcessingModal(false); 
 
-            // All error messages still use the simple showNotification bar at the top
-            const msg = (err?.message || "").toLowerCase();
-            if (
-                msg.includes("user rejected") ||
-                msg.includes("user denied") ||
-                msg.includes("cancelled") ||
-                msg.includes("canceled")
-            ) {
-                showNotification("Transaction cancelled.", "error");
-            } else if (
-                msg.includes("insufficient funds") ||
-                msg.includes("exceeds balance") ||
-                (msg.includes("execution reverted") && msg.includes("exceeds balance"))
-            ) {
-                showNotification("Insufficient BNB for gas fee or USDT balance.", "error");
-            } else {
-                showNotification("Transaction failed. Please try again.", "error");
-            }
-        } finally {
+                   } finally {
             // 🔥 CHANGE: Modal closing logic removed from finally.
             // It will only be closed in the catch block (on error/cancel).
             nextBtn.disabled = false;
